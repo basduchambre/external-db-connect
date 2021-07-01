@@ -20,10 +20,7 @@ This module will connect through an external database to periodically pull in da
 ## Package includes the following (unfinished)
 
 - Service provider
-- Migration file (Artisan command generated)
-    - Metrics
-    - Measured at
-    - Timezone(?)
+- Migration file
 - Config file
     - External DB connect settings
     - Measurement interval in minutes, e.g. 1 hour will be (int) 60
