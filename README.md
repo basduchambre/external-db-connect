@@ -6,7 +6,7 @@ This module will connect through an external database to periodically pull in da
 
 ## How to use
 
-1. Require the package with !TODO! `composer require basduchambre/external-db-connect`
+1. Require the package with `composer require basduchambre/external-db-connect` (not working, not on packagist yet...)
 2. Install the package with `php artisan externaldb:install`
 3. This will publish a config call in your Laravel config dir named `externaldb.php`
 4. Configure the database connection settings and the columns to be fetched, make sure the naming is identical of the columns you're targeting
