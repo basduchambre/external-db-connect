@@ -4,11 +4,20 @@ This module will connect through an external database to periodically pull in da
 
 ***
 
+## How to use
+
+1. Require the package with !TODO! `composer require basduchambre/external-db-connect`
+2. Install the package with `php artisan externaldb:install`
+3. This will publish a config call in your Laravel config dir named `externaldb.php`
+4. Configure the database connection settings and the columns to be fetched, make sure the naming is identical of the columns you're targeting
+5. To generate a migration file, use the command `php artisan externaldb:migration`
+6. TODO ...
+
 ## Requirements
 
 - Remote access has to be enabled on the database that will be called upon
 
-## Package includes the following
+## Package includes the following (unfinished)
 
 - Service provider
 - Migration file (Artisan command generated)
@@ -20,7 +29,7 @@ This module will connect through an external database to periodically pull in da
     - Measurement interval in minutes, e.g. 1 hour will be (int) 60
     - Metrics to pull identified by column name as array, e.g. ['email_address', 'zip_codes', 'location']
 - Artisan command to generate migration based on config
-- Artisan command, e.g. `php artisan external-db:fetch`
+- Artisan command, e.g. `php artisan externaldb:fetch`
 - Controllers
 
 ## Deliverables

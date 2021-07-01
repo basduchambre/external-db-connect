@@ -9,10 +9,8 @@ class ExternalDbConnectServiceProvider extends ServiceProvider
     public function boot()
     {
         $this->publishes([
-            __DIR__ . '/../config/externaldbconnect.php' => config_path('externaldbconnect.php'),
+            __DIR__ . '/../config/externaldb.php' => config_path('externaldb.php'),
         ]);
-
-        $this->loadMigrationsFrom(__DIR__ . '/../database/migrations');
     }
 
     public function register()
@@ -20,5 +18,10 @@ class ExternalDbConnectServiceProvider extends ServiceProvider
         $this->app->bind('externaldbconnect', function () {
             return new ExternalDbConnect();
         });
+
+        $this->commands([
+            Commands\Install::class,
+            Commands\Migration::class,
+        ]);
     }
 }
