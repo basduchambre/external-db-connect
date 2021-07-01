@@ -1,9 +1,9 @@
 <?php
-namespace Basduchambre\JuniperMist\Exceptions;
+namespace Basduchambre\WifiPortalConnect\Exceptions;
 
 use Exception;
 
-class InvalidApiToken extends Exception
+class GenericException extends Exception
 {
     public static function create(string $reason): self
     {

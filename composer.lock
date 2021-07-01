@@ -4,82 +4,9 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "19f8ec47817493c2ea727aa786cea1fa",
+    "content-hash": "6722d00d3ec058b27a9f6f41bfad3e64",
     "packages": [],
     "packages-dev": [
-        {
-            "name": "brainmaestro/composer-git-hooks",
-            "version": "v2.8.5",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/BrainMaestro/composer-git-hooks.git",
-                "reference": "ffed8803690ac12214082120eee3441b00aa390e"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/BrainMaestro/composer-git-hooks/zipball/ffed8803690ac12214082120eee3441b00aa390e",
-                "reference": "ffed8803690ac12214082120eee3441b00aa390e",
-                "shasum": ""
-            },
-            "require": {
-                "php": "^5.6 || >=7.0",
-                "symfony/console": "^3.2 || ^4.0 || ^5.0"
-            },
-            "require-dev": {
-                "ext-json": "*",
-                "friendsofphp/php-cs-fixer": "^2.9",
-                "phpunit/phpunit": "^5.7 || ^7.0"
-            },
-            "bin": [
-                "cghooks"
-            ],
-            "type": "library",
-            "extra": {
-                "hooks": {
-                    "pre-commit": "composer check-style",
-                    "pre-push": [
-                        "composer test",
-                        "appver=$(grep -o -E '\\d.\\d.\\d' cghooks)",
-                        "tag=$(git describe --tags --abbrev=0)",
-                        "if [ \"$tag\" != \"v$appver\" ]; then",
-                        "echo \"The most recent tag $tag does not match the application version $appver\\n\"",
-                        "tag=${tag#v}",
-                        "sed -i -E \"s/$appver/$tag/\" cghooks",
-                        "exit 1",
-                        "fi"
-                    ]
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "BrainMaestro\\GitHooks\\": "src/"
-                },
-                "files": [
-                    "src/helpers.php"
-                ]
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Ezinwa Okpoechi",
-                    "email": "brainmaestro@outlook.com"
-                }
-            ],
-            "description": "Easily manage git hooks in your composer config",
-            "keywords": [
-                "HOOK",
-                "composer",
-                "git"
-            ],
-            "support": {
-                "issues": "https://github.com/BrainMaestro/composer-git-hooks/issues",
-                "source": "https://github.com/BrainMaestro/composer-git-hooks/tree/v2.8.5"
-            },
-            "time": "2021-02-08T15:59:11+00:00"
-        },
         {
             "name": "composer/semver",
             "version": "3.2.5",
@@ -1045,16 +972,16 @@
         },
         {
             "name": "symfony/filesystem",
-            "version": "v5.3.0",
+            "version": "v5.3.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/filesystem.git",
-                "reference": "348116319d7fb7d1faa781d26a48922428013eb2"
+                "reference": "19b71c8f313b411172dd5f470fd61f24466d79a9"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/filesystem/zipball/348116319d7fb7d1faa781d26a48922428013eb2",
-                "reference": "348116319d7fb7d1faa781d26a48922428013eb2",
+                "url": "https://api.github.com/repos/symfony/filesystem/zipball/19b71c8f313b411172dd5f470fd61f24466d79a9",
+                "reference": "19b71c8f313b411172dd5f470fd61f24466d79a9",
                 "shasum": ""
             },
             "require": {
@@ -1087,7 +1014,7 @@
             "description": "Provides basic utilities for the filesystem",
             "homepage": "https://symfony.com",
             "support": {
-                "source": "https://github.com/symfony/filesystem/tree/v5.3.0"
+                "source": "https://github.com/symfony/filesystem/tree/v5.3.3"
             },
             "funding": [
                 {
@@ -1103,7 +1030,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2021-05-26T17:43:10+00:00"
+            "time": "2021-06-30T07:27:52+00:00"
         },
         {
             "name": "symfony/finder",
@@ -2002,16 +1929,16 @@
         },
         {
             "name": "symfony/string",
-            "version": "v5.3.2",
+            "version": "v5.3.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/string.git",
-                "reference": "0732e97e41c0a590f77e231afc16a327375d50b0"
+                "reference": "bd53358e3eccec6a670b5f33ab680d8dbe1d4ae1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/string/zipball/0732e97e41c0a590f77e231afc16a327375d50b0",
-                "reference": "0732e97e41c0a590f77e231afc16a327375d50b0",
+                "url": "https://api.github.com/repos/symfony/string/zipball/bd53358e3eccec6a670b5f33ab680d8dbe1d4ae1",
+                "reference": "bd53358e3eccec6a670b5f33ab680d8dbe1d4ae1",
                 "shasum": ""
             },
             "require": {
@@ -2065,7 +1992,7 @@
                 "utf8"
             ],
             "support": {
-                "source": "https://github.com/symfony/string/tree/v5.3.2"
+                "source": "https://github.com/symfony/string/tree/v5.3.3"
             },
             "funding": [
                 {
@@ -2081,7 +2008,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2021-06-06T09:51:56+00:00"
+            "time": "2021-06-27T11:44:38+00:00"
         }
     ],
     "aliases": [],

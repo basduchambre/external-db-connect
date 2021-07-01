@@ -1,5 +1,5 @@
 {
-  "name": "basduchambre/wifi-portal-connect",
+  "name": "basduchambre/external-db-connect",
   "type": "library",
   "description": "Laravel package to connect to external database and fetch data.",
   "license": "MIT",
@@ -14,7 +14,7 @@
   },
   "autoload": {
     "psr-4": {
-      "Basduchambre\\WifiPortalConnect\\": "src/"
+      "Basduchambre\\ExternalDbConnect\\": "src/"
     }
   },
   "scripts": {
@@ -26,10 +26,10 @@
     },
     "laravel": {
       "providers": [
-        "Basduchambre\\WifiPortalConnect\\WifiPortalConnectServiceProvider"
+        "Basduchambre\\ExternalDbConnect\\ExternalDbConnectServiceProvider"
       ],
       "aliases": {
-        "JuniperMist": "Basduchambre\\WifiPortalConnect\\Facade"
+        "ExternalDbConnect": "Basduchambre\\ExternalDbConnect\\Facade"
       }
     }
   },
