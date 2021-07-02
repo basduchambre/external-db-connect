@@ -21,7 +21,7 @@ class ExternalDbConnectServiceProvider extends ServiceProvider
 
         $this->commands([
             Commands\Install::class,
-            Commands\Migration::class,
+            Commands\Generate::class,
         ]);
     }
 }
