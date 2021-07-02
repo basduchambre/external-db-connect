@@ -3,6 +3,7 @@
 namespace Basduchambre\ExternalDbConnect;
 
 use \PDO;
+use Basduchambre\ExternalDbConnect\Exceptions\NoColumns;
 
 class Connection
 {
@@ -15,9 +16,9 @@ class Connection
         $this->table = config('externaldb.external_db.table');
         $this->username = config('externaldb.external_db.username');
         $this->password = config('externaldb.external_db.password');
-        //$this->unix_socket = config('externaldb.external_db.unix_socket');
         $this->charset = config('externaldb.external_db.charset');
         $this->columns = config('externaldb.migration.columns');
+        $this->table = config('externaldb.external_db.table');
     }
 
     public function open()
@@ -44,5 +45,20 @@ class Connection
         $pdo = null;
 
         return $pdo;
+    }
+
+    public function query($pdo, $timecolumn, $start, $end)
+    {
+        if ($timecolumn) {
+            $query = $pdo->prepare("SELECT * FROM $this->table where $timecolumn > ? and $timecolumn < ?");
+            $query->execute([$start, $end]);
+        } else {
+            $query = $pdo->prepare("SELECT * FROM $this->table");
+            $query->execute([]);
+        }
+
+        $results = $query->fetchAll();
+
+        return $results;
     }
 }

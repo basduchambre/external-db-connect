@@ -2,21 +2,28 @@
 
 namespace Basduchambre\ExternalDbConnect;
 
+use \PDO;
+use DateTime;
 use Basduchambre\ExternalDbConnect\Connection;
 use Basduchambre\ExternalDbConnect\Exceptions\NoColumns;
+use Basduchambre\ExternalDbConnect\Exceptions\NoTimeColumn;
 
 class ExternalDbConnect
 {
+    private $start;
+    private $end;
+    private $timecolumn;
 
     public function __construct()
     {
         $this->columns = config('externaldb.migration.columns');
-        $this->tables = config('externaldb.external_db.table');
+        $this->start = date("Y-m-d", strtotime("-7 days")); // default
+        $this->end = date("Y-m-d", strtotime("today")); // default
     }
 
-    public function timetable(string $start)
+    public function timecolumn(string $timecolumn)
     {
-        $this->start = $start;
+        $this->timecolumn = $timecolumn;
 
         return $this;
     }
@@ -37,21 +44,30 @@ class ExternalDbConnect
 
     public function get()
     {
+        // return $this->end;
+        // open connection
         $connection = new Connection();
         $pdo = $connection->open();
 
+        // perform query
+        if ($this->start && $this->end && !$this->timecolumn) {
+            throw new NoTimeColumn("The time column isn't specified, can't filter on time");
+        }
+        $results = $connection->query($pdo, $this->timecolumn, $this->start, $this->end);
+
+        // close connection
+        $pdo = $connection->close($pdo);
+
+        // filter results by wanted columns
         if (!count($this->columns) > 0) {
             throw new NoColumns("There are no columns configured!");
         }
 
-        $columns = implode(', ', array_column($this->columns, 'name'));
+        $columns = array_column($this->columns, 'name');
 
-        $query = $pdo->prepare("SELECT $columns FROM $this->tables");
-        $query->execute([]);
-
-        $results = $query->fetchAll();
-
-        $pdo = $connection->close($pdo);
+        foreach ($results as &$result) {
+            $result = array_intersect_key($result, array_flip($columns));
+        }
 
         return $results;
     }
