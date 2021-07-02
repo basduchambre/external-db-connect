@@ -8,7 +8,7 @@ return [
     |--------------------------------------------------------------------------
     |
     | Make sure you're authenticated to connect to the external database
-    | and set the IP, portal, username and password.
+    | and set the driver, host, port, database, table, username and password.
     |
     */
 
@@ -38,12 +38,13 @@ return [
     | External DB Connect - Settings for fetching data
     |--------------------------------------------------------------------------
     |
-    | Make sure you're authenticated to connect to the external database
-    | and set the IP, portal, username and password.
+    | Set the columns you want to retrieve from the table and specify
+    | the name of the date column fo filtering
     |
     */
 
     'migration' => [
+        'date_column' => 'created_at',
         'columns' => [
             [
                 'name' => 'email_address',
@@ -54,6 +55,12 @@ return [
             [
                 'name' => 'name',
                 'type' => 'string',
+                'default' => '',
+                'nullable' => true,
+            ],
+            [
+                'name' => 'created_at',
+                'type' => 'timestamp',
                 'default' => '',
                 'nullable' => true,
             ],

@@ -4,6 +4,7 @@ namespace Basduchambre\ExternalDbConnect;
 
 use \PDO;
 use Basduchambre\ExternalDbConnect\Exceptions\NoColumns;
+use Basduchambre\ExternalDbConnect\Exceptions\WrongDateColumn;
 
 class Connection
 {
@@ -18,7 +19,7 @@ class Connection
         $this->password = config('externaldb.external_db.password');
         $this->charset = config('externaldb.external_db.charset');
         $this->columns = config('externaldb.migration.columns');
-        $this->table = config('externaldb.external_db.table');
+        $this->date_column = config('externaldb.migration.date_column');
     }
 
     public function open()
@@ -47,10 +48,14 @@ class Connection
         return $pdo;
     }
 
-    public function query($pdo, $timecolumn, $start, $end)
+    public function query($pdo, $start, $end)
     {
-        if ($timecolumn) {
-            $query = $pdo->prepare("SELECT * FROM $this->table where $timecolumn > ? and $timecolumn < ?");
+        if ($start && $end) {
+            // check if date column actually exists inside the columns that will be retrieved
+            if (!in_array($this->date_column, array_column($this->columns, 'name'))) {
+                throw new WrongDateColumn("The specified time column doesn't exists in your set columns!");
+            }
+            $query = $pdo->prepare("SELECT * FROM $this->table where $this->date_column > ? and $this->date_column < ?");
             $query->execute([$start, $end]);
         } else {
             $query = $pdo->prepare("SELECT * FROM $this->table");
