@@ -5,6 +5,7 @@ namespace Basduchambre\ExternalDbConnect;
 use \PDO;
 use Basduchambre\ExternalDbConnect\Exceptions\NoColumns;
 use Basduchambre\ExternalDbConnect\Exceptions\WrongDateColumn;
+use Basduchambre\ExternalDbConnect\Exceptions\MissingDatabaseSettings;
 
 class Connection
 {
@@ -24,6 +25,9 @@ class Connection
 
     public function open()
     {
+        if (!$this->driver || !$this->host || !$this->port || !$this->database || !$this->charset) {
+            throw new MissingDatabaseSettings("Missing settings for the database connections, check your config");
+        }
         $dsn = "$this->driver:host=$this->host;port=$this->port;dbname=$this->database;charset=$this->charset";
 
         $options = [
@@ -50,6 +54,10 @@ class Connection
 
     public function query($pdo, $start, $end)
     {
+        if (!$this->table) {
+            throw new MissingDatabaseSettings("Missing table to retrieve data from, check your config");
+        }
+
         if ($start && $end) {
             // check if date column actually exists inside the columns that will be retrieved
             if (!in_array($this->date_column, array_column($this->columns, 'name'))) {
